@@ -2,7 +2,6 @@ package com.example.demorest.controllers;
 
 import com.example.demorest.models.Friend;
 import com.example.demorest.services.FriendService;
-import com.example.demorest.utils.ErrorMessage;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -22,12 +21,6 @@ public class FriendController {
         if (friend.getId() == 0 && friend.getFirstName() != null && friend.getLastName() != null)
             return friendService.save(friend);
         else throw new ValidationException("friend is not complete");
-    }
-
-    @ResponseStatus(HttpStatus.BAD_REQUEST)
-    @ExceptionHandler
-    ErrorMessage exceptionHandler(ValidationException e) {
-        return new ErrorMessage("400", e.getMessage());
     }
 
     @GetMapping("/friend")

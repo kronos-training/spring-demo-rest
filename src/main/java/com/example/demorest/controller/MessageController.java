@@ -1,16 +1,21 @@
 package com.example.demorest.controller;
 
 import com.example.demorest.model.Message;
-import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RestController;
 
-@Controller
+@RestController
 public class MessageController {
 
-    @ResponseBody
     @GetMapping("/message")
     Message send() {
         return new Message("First message");
+    }
+
+    @PostMapping("/message")
+    Message echo(@RequestBody Message message) {
+        return message;
     }
 }

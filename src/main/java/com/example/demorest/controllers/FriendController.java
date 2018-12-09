@@ -2,6 +2,7 @@ package com.example.demorest.controllers;
 
 import com.example.demorest.models.Friend;
 import com.example.demorest.services.FriendService;
+import com.example.demorest.utils.ErrorMessage;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -23,9 +24,10 @@ public class FriendController {
         else throw new ValidationException("friend is not complete");
     }
 
-    @ExceptionHandler(ValidationException.class)
-    ResponseEntity<String> exceptionHandler(ValidationException e) {
-        return new ResponseEntity(e.getMessage(), HttpStatus.BAD_REQUEST);
+    @ResponseStatus(HttpStatus.BAD_REQUEST)
+    @ExceptionHandler
+    ErrorMessage exceptionHandler(ValidationException e) {
+        return new ErrorMessage("400", e.getMessage());
     }
 
     @GetMapping("/friend")

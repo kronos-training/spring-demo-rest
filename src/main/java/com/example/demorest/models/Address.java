@@ -2,8 +2,12 @@ package com.example.demorest.models;
 
 import javax.persistence.*;
 
-@Embeddable
+@Entity
 public class Address {
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private int id;
+
     private String street;
     private String city;
 

@@ -4,6 +4,7 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
 import javax.persistence.*;
+import java.util.List;
 
 @Entity
 public class Friend {
@@ -18,16 +19,15 @@ public class Friend {
     @JsonIgnore
     boolean married;
 
+    @OneToMany(cascade = CascadeType.ALL)
+    List<Address> addresses;
 
-    @Embedded
-    Address address;
-
-    public Address getAddress() {
-        return address;
+    public List<Address> getAddresses() {
+        return addresses;
     }
 
-    public void setAddress(Address address) {
-        this.address = address;
+    public void setAddresses(List<Address> addresses) {
+        this.addresses = addresses;
     }
 
     public int getAge() {

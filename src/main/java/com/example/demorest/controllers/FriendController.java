@@ -7,6 +7,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import javax.xml.bind.ValidationException;
 import java.util.Optional;
 
 @RestController
@@ -16,8 +17,15 @@ public class FriendController {
     FriendService friendService;
 
     @PostMapping("/friend")
-    Friend create(@RequestBody Friend friend) {
-        return friendService.save(friend);
+    Friend create(@RequestBody Friend friend) throws ValidationException {
+        if (friend.getId() == 0 && friend.getFirstName() != null && friend.getLastName() != null)
+            return friendService.save(friend);
+        else throw new ValidationException("friend is not complete");
+    }
+
+    @ExceptionHandler(ValidationException.class)
+    ResponseEntity<String> exceptionHandler(ValidationException e) {
+        return new ResponseEntity(e.getMessage(), HttpStatus.BAD_REQUEST);
     }
 
     @GetMapping("/friend")

@@ -5,7 +5,6 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotBlank;
-import java.util.List;
 import java.util.Set;
 
 @Entity
@@ -22,7 +21,7 @@ public class Friend {
     @JsonIgnore
     boolean married;
 
-    @OneToMany(mappedBy = "friend")
+    @ManyToMany(mappedBy = "friends")
     private Set<Address> addresses;
 
     public Set<Address> getAddresses() {

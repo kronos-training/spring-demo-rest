@@ -1,6 +1,7 @@
 package com.example.demorest.models;
 
 import javax.persistence.*;
+import java.util.Set;
 
 @Entity
 public class Address {
@@ -12,14 +13,14 @@ public class Address {
     private String city;
 
     @ManyToOne
-    private Friend friend;
+    private Set<Friend> friends;
 
-    public Friend getFriend() {
-        return friend;
+    public Set<Friend> getFriends() {
+        return friends;
     }
 
-    public void setFriend(Friend friend) {
-        this.friend = friend;
+    public void setFriends(Set<Friend> friends) {
+        this.friends = friends;
     }
 
     public String getStreet() {

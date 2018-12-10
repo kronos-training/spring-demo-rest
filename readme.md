@@ -2,4 +2,6 @@
 
 ```sh
 mvn sprint-boot:run
+mvn -Dtest=DemoRestApp* test
+mvn test
 ```

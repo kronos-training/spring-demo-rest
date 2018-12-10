@@ -6,6 +6,7 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 import javax.persistence.*;
 import javax.validation.constraints.NotBlank;
 import java.util.List;
+import java.util.Set;
 
 @Entity
 public class Friend {
@@ -21,14 +22,14 @@ public class Friend {
     @JsonIgnore
     boolean married;
 
-    @OneToMany(cascade = CascadeType.ALL)
-    List<Address> addresses;
+    @OneToMany(mappedBy = "friend")
+    private Set<Address> addresses;
 
-    public List<Address> getAddresses() {
+    public Set<Address> getAddresses() {
         return addresses;
     }
 
-    public void setAddresses(List<Address> addresses) {
+    public void setAddresses(Set<Address> addresses) {
         this.addresses = addresses;
     }
 

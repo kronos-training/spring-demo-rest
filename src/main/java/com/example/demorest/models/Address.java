@@ -11,6 +11,17 @@ public class Address {
     private String street;
     private String city;
 
+    @ManyToOne
+    private Friend friend;
+
+    public Friend getFriend() {
+        return friend;
+    }
+
+    public void setFriend(Friend friend) {
+        this.friend = friend;
+    }
+
     public String getStreet() {
         return street;
     }
